@@ -11,10 +11,8 @@ form.addEventListener("submit", (event) => {
   const li = document.createElement("li");
   li.innerHTML = `
     <div> <img class="img-responsive" src="${URL.createObjectURL(handbagPhoto)}"/> </div>
-    <div> 
-      <span>${handbagName}</span>
-      <span>${price}</span>
-    </div>
+    <div> <span>${handbagName}</span> </div>
+    <div> <span>${price}</span> </div>
     <div>
       <button class="edit">Edit</button>
       <button class="delete">Delete</button>
@@ -23,10 +21,12 @@ form.addEventListener("submit", (event) => {
   
   li.querySelector(".delete").addEventListener("click", (event) => {
     li.remove();
+    let handbags = JSON.parse(localStorage.getItem("handbags")) || [];
+    handbags = handbags.filter(handbag => handbag.handbagName !== handbagName || handbag.price !== price);
+    localStorage.setItem("handbags", JSON.stringify(handbags));
   });
   
   handbagList.appendChild(li);
-
 
   const reader = new FileReader();
   reader.onload = function() {
@@ -37,6 +37,9 @@ form.addEventListener("submit", (event) => {
     localStorage.setItem("handbags", JSON.stringify(handbags));
   };
   reader.readAsDataURL(handbagPhoto);
+
+  // Clear the values in the form fields
+  form.reset();
 });
 // Retrieve the stored data and recreate the list items on page reload
 window.addEventListener("load", () => {
@@ -55,9 +58,12 @@ window.addEventListener("load", () => {
 
     li.querySelector(".delete").addEventListener("click", (event) => {
       li.remove();
+      let handbags = JSON.parse(localStorage.getItem("handbags")) || [];
+      const handbagIndex = handbags.findIndex((handbag) => handbag.handbagName === handbag.handbagName);
+      handbags.splice(handbagIndex, 1);
+      localStorage.setItem("handbags", JSON.stringify(handbags));
     });
 
     handbagList.appendChild(li);
   });
 });
-
