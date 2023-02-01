@@ -1,36 +1,29 @@
-const photoInput = document.querySelector('.handbag-photo');
-const handbagNameInput = document.querySelector('.handbag-name');
-const priceInput = document.querySelector('.price');
-const handbagForm = document.querySelector('form');
-const handbagList = document.querySelector('#handbag-list');
+const form = document.querySelector("form");
+const handbagList = document.querySelector("#handbag-list");
 
-handbagForm.addEventListener('submit', (event) => {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const photo = photoInput.files[0];
-  const handbagName = handbagNameInput.value;
-  const price = priceInput.value;
 
-  const reader = new FileReader();
-  reader.readAsDataURL(photo);
-  reader.onload = function() {
-    const photoDataURL = reader.result;
+  const handbagPhoto = form.querySelector(".handbag-photo").files[0];
+  const handbagName = form.querySelector(".handbag-name").value;
+  const price = form.querySelector(".price").value;
   
-    const handbagItem = document.createElement('li');
-    handbagItem.innerHTML = `
-      <div>
-        <div class="img-responsive">
-          <img src=${photoDataURL} alt="#">
-        </div>
-        <div class="text-center">
-          <h5>${handbagName}</h5>
-          <h6>${price}</h6>
-          <div>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-        </div>
-      </div>
-    `;
-    handbagList.appendChild(handbagItem);
-  };
+  const li = document.createElement("li");
+  li.innerHTML = `
+    <div> <img class="img-responsive" src="${URL.createObjectURL(handbagPhoto)}"/> </div>
+    <div> 
+      <span>${handbagName}</span>
+      <span>${price}</span>
+    </div>
+    <div>
+      <button class="edit">Edit</button>
+      <button class="delete">Delete</button>
+    </div>
+  `;
+  
+  li.querySelector(".delete").addEventListener("click", (event) => {
+    li.remove();
+  });
+  
+  handbagList.appendChild(li);
 });
