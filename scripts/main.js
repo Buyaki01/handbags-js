@@ -1,5 +1,18 @@
-const form = document.querySelector("form");
+const allHandbags = document.querySelector(".all-handbags");
+const handbagForm = document.querySelector(".add-handbag");
 const handbagList = document.querySelector("#handbag-list");
+
+allHandbags.addEventListener('click', () => {
+  document.querySelector('.handbag-form').style.display = 'none';
+  document.querySelector('.handbags-section').style.display = 'block';
+});
+
+handbagForm.addEventListener('click', () => {
+  document.querySelector('.handbag-form').style.display = 'block';
+  document.querySelector('.handbags-section').style.display = 'none';
+});
+
+const form = document.querySelector("form");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();

@@ -16,12 +16,12 @@
         </div>
         <div class="mr-3">
           <div class="d-flex align-items-end">
-            <div><p>All Handbags</p></div>
+            <div class="all-handbags"><p>All Handbags</p></div>
             <div class="ml-4 add-handbag"><p>Add Handbag</p></div>
           </div>
         </div>
       </nav>
-      <article>
+      <section class="handbag-form" style="display:none">
         <form class="ml-5 text-center">
           <div>
             <label for="photo">Handbag Photo:</label>
@@ -39,10 +39,11 @@
             <input type="submit" value="Submit">
           </div>
         </form>
+      </section>
+      <section class="handbags-section">
         <ul id="handbag-list">
         </ul>
-        
-      </article>
+      </section>
     </main>
     <script src="scripts/main.js"></script>
   </body>
