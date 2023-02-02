@@ -22,7 +22,8 @@ form.addEventListener("submit", (event) => {
   li.querySelector(".delete").addEventListener("click", (event) => {
     li.remove();
     let handbags = JSON.parse(localStorage.getItem("handbags")) || [];
-    handbags = handbags.filter(handbag => handbag.handbagName !== handbagName || handbag.price !== price);
+    const handbagIndex = handbags.findIndex((handbag) => handbag.handbagName === handbagName);
+    handbags.splice(handbagIndex, 1);
     localStorage.setItem("handbags", JSON.stringify(handbags));
   });
   
@@ -59,7 +60,7 @@ window.addEventListener("load", () => {
     li.querySelector(".delete").addEventListener("click", (event) => {
       li.remove();
       let handbags = JSON.parse(localStorage.getItem("handbags")) || [];
-      const handbagIndex = handbags.findIndex((handbag) => handbag.handbagName === handbag.handbagName);
+      const handbagIndex = handbags.findIndex((handbag) => handbag.handbagName === handbagName);
       handbags.splice(handbagIndex, 1);
       localStorage.setItem("handbags", JSON.stringify(handbags));
     });
