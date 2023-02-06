@@ -1,8 +1,12 @@
 .img-responsive {
   max-width: 100px;
-  height: auto;
+  height: 100px;
 }
 
 ul {
   list-style-type: none;
+}
+
+.item {
+  margin: 50px !important;
 }

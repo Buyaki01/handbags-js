@@ -24,8 +24,8 @@ form.addEventListener("submit", (event) => {
   const li = document.createElement("li");
   li.innerHTML = `
     <div> <img class="img-responsive" src="${URL.createObjectURL(handbagPhoto)}"/> </div>
-    <div> <span>${handbagName}</span> </div>
-    <div> <span>${price}</span> </div>
+    <div class="text-center"> <span>${handbagName}</span> </div>
+    <div class="text-center"> <span>${price}</span> </div>
     <div>
       <button class="edit">Edit</button>
       <button class="delete">Delete</button>
@@ -39,7 +39,8 @@ form.addEventListener("submit", (event) => {
     handbags.splice(handbagIndex, 1);
     localStorage.setItem("handbags", JSON.stringify(handbags));
   });
-  
+
+  li.classList.add("item");
   handbagList.appendChild(li);
 
   const reader = new FileReader();
@@ -62,8 +63,8 @@ window.addEventListener("load", () => {
     const li = document.createElement("li");
     li.innerHTML = `
       <div> <img class="img-responsive" src="${handbag.dataURL}"/> </div>
-      <div> <span>${handbag.handbagName}</span> </div>
-      <div> <span>${handbag.price}</span>  </div>
+      <div class="text-center"> <span>${handbag.handbagName}</span> </div>
+      <div class="text-center"> <span>${handbag.price}</span>  </div>
       <div>
         <button class="edit">Edit</button>
         <button class="delete">Delete</button>
@@ -73,11 +74,12 @@ window.addEventListener("load", () => {
     li.querySelector(".delete").addEventListener("click", (event) => {
       li.remove();
       let handbags = JSON.parse(localStorage.getItem("handbags")) || [];
-      const handbagIndex = handbags.findIndex((handbag) => handbag.handbagName === handbagName);
+      const handbagIndex = handbags.findIndex((handbag) => handbag.handbagName === handbag.handbagName);
       handbags.splice(handbagIndex, 1);
       localStorage.setItem("handbags", JSON.stringify(handbags));
     });
-
+    
+    li.classList.add("item");
     handbagList.appendChild(li);
   });
 });
